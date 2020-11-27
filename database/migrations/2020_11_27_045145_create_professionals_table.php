@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateDegreesObtainedsTable extends Migration
+class CreateProfessionalsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,15 @@ class CreateDegreesObtainedsTable extends Migration
      */
     public function up()
     {
-        // Grados obtenidos (externos)
-        Schema::create('degrees_obtaineds', function (Blueprint $table) {
+        Schema::create('professionals', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('degree_id')->deleteOnCascade();
-            $table->string('mention')->nullable();
+            $table->foreignId('career_id')->deleteOnCascade();
+            $table->foreignId('person_id')->deleteOnCascade();
+            $table->foreignId('degree_id')->nullable();
             $table->string('title')->nullable();
             $table->string('title_num')->nullable();
-            $table->string('institution')->nullable();
+            $table->string('mention')->nullable();
             $table->integer('start_year')->nullable();
             $table->integer('end_year')->nullable();
             $table->date('date_issued')->nullable();
@@ -41,6 +41,6 @@ class CreateDegreesObtainedsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('degrees_obtaineds');
+        Schema::dropIfExists('professionals');
     }
 }

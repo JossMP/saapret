@@ -13,6 +13,7 @@ class CreatePeopleTable extends Migration
      */
     public function up()
     {
+        // Datos Personales
         Schema::create('people', function (Blueprint $table) {
             $table->id();
 
@@ -22,15 +23,18 @@ class CreatePeopleTable extends Migration
             $table->date('birthday');
             $table->enum('doc_type', ['DNI', 'CE', 'Pasaporte', 'Otros']);
             $table->string('doc_num', 16);
+            $table->string('marital_status')->nullable()->default('Soltero(a)');
             $table->unsignedInteger('location_home'); //ubigeo
             $table->unsignedInteger('location_birth'); //ubigeo
             $table->string('address')->nullable();
             $table->string('email')->nullable();
-            $table->string('slug')->unique();
+            $table->string('phone')->nullable();
+            $table->string('slug')->unique(); // name-last_name-doc_num
             $table->boolean('published')->default(false);
             $table->boolean('verified')->default(false);
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

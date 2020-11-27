@@ -27,6 +27,7 @@ class CreateCertificatesTable extends Migration
             $table->foreignId('person_id')->deleteOnCascade();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

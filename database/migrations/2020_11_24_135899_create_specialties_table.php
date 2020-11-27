@@ -13,14 +13,16 @@ class CreateSpecialtiesTable extends Migration
      */
     public function up()
     {
+        // Especialidad de carrera/escuela profesional
         Schema::create('specialties', function (Blueprint $table) {
             $table->id();
 
             $table->string('name');
             $table->string('slug')->unique();
-            $table->foreignId('profession_id')->deteleOnCascade();
+            $table->foreignId('career_id')->deteleOnCascade();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

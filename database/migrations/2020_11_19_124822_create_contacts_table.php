@@ -23,6 +23,7 @@ class CreateContactsTable extends Migration
             $table->boolean('viewed')->default(false);
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

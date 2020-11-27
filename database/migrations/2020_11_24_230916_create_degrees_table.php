@@ -13,6 +13,7 @@ class CreateDegreesTable extends Migration
      */
     public function up()
     {
+        // Grados (Lic. Bach. ....)
         Schema::create('degrees', function (Blueprint $table) {
             $table->id();
 
@@ -21,6 +22,7 @@ class CreateDegreesTable extends Migration
             $table->string('slug')->unique();
 
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

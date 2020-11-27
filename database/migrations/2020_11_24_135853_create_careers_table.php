@@ -3,8 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Nullable;
 
-class CreateProfessionsTable extends Migration
+class CreateCareersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +14,14 @@ class CreateProfessionsTable extends Migration
      */
     public function up()
     {
-        // Profesiones
-        Schema::create('professions', function (Blueprint $table) {
+        // Carrera profesional
+        Schema::create('careers', function (Blueprint $table) {
             $table->id();
 
             $table->string('name');
+            $table->text('description')->nullable();
+            $table->foreignId('profession_id');
+            $table->string('icon')->default('fa fa-graduation-cap');
             $table->string('slug')->unique();
 
             $table->timestamps();
@@ -32,6 +36,6 @@ class CreateProfessionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('professions');
+        Schema::dropIfExists('careers');
     }
 }
