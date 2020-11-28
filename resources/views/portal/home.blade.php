@@ -433,7 +433,7 @@ Sistema de Seguimiento de Egresados
 </section>
 
 <section class="bg-white w-full px-5 sm:px-8 xl:pt-6 lg:px-16 xl:px-40 2xl:px-64 pt-4">
-    <x-widget-statistics></x-widget-statistics>
+    <x-widget-statistics title=""></x-widget-statistics>
 </section>
 
 @endsection

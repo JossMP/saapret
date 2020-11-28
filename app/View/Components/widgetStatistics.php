@@ -19,6 +19,6 @@ class WidgetStatistics extends Component
 
     public function render()
     {
-        return view('components.widget-statistics', ['title' => $this->title, 'careers' => $this->careers]);
+        return view('components.widget-statistics');
     }
 }
