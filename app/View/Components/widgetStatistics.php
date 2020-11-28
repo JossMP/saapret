@@ -12,11 +12,12 @@ class widgetStatistics extends Component
     public function __construct($title = null)
     {
         $this->title = ($title != null) ? $title : $this->title;
+
         $this->careers = Career::all();
     }
 
     public function render()
     {
-        return view('components.widget-statistics');
+        return view('components.widget-statistics', ['title' => $this->title, 'careers' => $this->careers]);
     }
 }
