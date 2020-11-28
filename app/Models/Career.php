@@ -9,4 +9,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Career extends Model
 {
     use HasFactory, SoftDeletes;
+
+    function graduates()
+    {
+        return $this->hasMany(Graduate::class);
+    }
+
+    // slug
+    function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }

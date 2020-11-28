@@ -13,7 +13,7 @@ class CreateSpecialtiesTable extends Migration
      */
     public function up()
     {
-        // Especialidad de carrera/escuela profesional
+        // Especialidad de carrera/escuela profesional (No usado)
         Schema::create('specialties', function (Blueprint $table) {
             $table->id();
 

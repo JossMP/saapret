@@ -23,7 +23,7 @@ Sistema de Seguimiento de Egresados
             <p class="text-center lg:text-left sm:text-lg text-gray-500 lg:pr-40 leading-relaxed">
                 {{ config('app.name') }}
             </p>
-            <a href="#"
+            <a href="{{ route('portal.graduates.index') }}"
                 class="bg-blue-400 hover:bg-blue-500 my-4 lg:my-16 py-3 px-8 sm:text-lg rounded-full font-bold uppercase text-white tracking-widest">
                 <i class="fa fa-search"></i> Profesionales
             </a>
@@ -430,6 +430,10 @@ Sistema de Seguimiento de Egresados
         </div>
     </div>
 
+</section>
+
+<section class="bg-white w-full px-5 sm:px-8 xl:pt-6 lg:px-16 xl:px-40 2xl:px-64 pt-4">
+    <x-widget-statistics></x-widget-statistics>
 </section>
 
 @endsection

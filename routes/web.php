@@ -1,9 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use Illuminate\Support\Facades\Auth;
-use Modules\Books\Models\Book;
 
 Route::name('portal.')->group(function () {
     // Home Page
@@ -18,8 +16,9 @@ Route::name('portal.')->group(function () {
     // Terms Page
     Route::get('/terms', [App\Http\Controllers\PortalController::class, 'terms'])->name('terms');
 
-    // Libros
-    Route::resource('/professions', \App\Http\Controllers\ProfessionController::class)->only(['index']);
+    // Graduados
+    Route::resource('/graduates', \App\Http\Controllers\GraduateController::class)->only(['index']);
+    Route::get('/graduates/{career}', [\App\Http\Controllers\GraduateController::class, 'index_career'])->name('graduates.career');
 });
 
 

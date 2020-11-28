@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Profession;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class ProfessionFactory extends Factory
 {
@@ -22,7 +23,11 @@ class ProfessionFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name'  => $this->faker->jobTitle,
+            'short' => $this->faker->title(),
+            'slug'  => function (array $profession) {
+                return Str::slug($profession['short'] . ' ' . $profession['name']);
+            },
         ];
     }
 }

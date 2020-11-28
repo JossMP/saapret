@@ -3,7 +3,10 @@
 namespace Database\Factories;
 
 use App\Models\Career;
+use App\Models\Degree;
+use App\Models\Profession;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class CareerFactory extends Factory
 {
@@ -22,7 +25,14 @@ class CareerFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name'          => $this->faker->sentence(6),
+            'description'   => $this->faker->text(500),
+            'profession_id' => Profession::inRandomOrder()->value('id'),
+            'degree_id'     => Degree::inRandomOrder()->value('id'),
+            'icon'          => $this->faker->randomElement(['fa fa-graduation-cap', 'fa fa-user-graduate', 'fa fa-laptop-code', 'fa fa-microscope', 'fa fa-swimmer']),
+            'slug'          => function (array $career) {
+                return Str::slug($career['name']);
+            },
         ];
     }
 }

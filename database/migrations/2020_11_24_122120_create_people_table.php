@@ -22,7 +22,7 @@ class CreatePeopleTable extends Migration
             $table->string('photo')->nullable();
             $table->date('birthday');
             $table->enum('doc_type', ['DNI', 'CE', 'Pasaporte', 'Otros']);
-            $table->string('doc_num', 16);
+            $table->string('doc_num', 16)->unique();
             $table->string('marital_status')->nullable()->default('Soltero(a)');
             $table->unsignedInteger('location_home'); //ubigeo
             $table->unsignedInteger('location_birth'); //ubigeo

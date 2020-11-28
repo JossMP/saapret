@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Degree;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class DegreeFactory extends Factory
 {
@@ -22,7 +23,11 @@ class DegreeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name'  => $this->faker->sentence(),
+            'short' => $this->faker->title,
+            'slug'          => function (array $degree) {
+                return Str::slug($degree['name'] . ' ' . $degree['short']);
+            },
         ];
     }
 }

@@ -10,4 +10,10 @@ class Profession extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
+
+    // slug
+    function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
