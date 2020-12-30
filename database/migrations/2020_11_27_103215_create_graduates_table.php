@@ -16,15 +16,15 @@ class CreateGraduatesTable extends Migration
         Schema::create('graduates', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('career_id')->constrained()->deleteOnCascade(); // Carrera
-            $table->foreignId('person_id')->constrained()->deleteOnCascade(); // Datos Personales
-            $table->foreignId('degree_id')->nullable(); // Grado Obtenido
-            $table->string('title')->nullable(); // Titulo otorgado (ejemplo: Abogado, Arquitecto) (no nesesario \ incluido en carrera)
+            $table->text('title'); // Titulo Otorgado
             $table->string('title_num')->nullable(); // Numero de titulo
             $table->string('mention')->nullable(); // Mension que figura en el titulo prof.
             $table->integer('start_year')->nullable();
             $table->integer('end_year')->nullable();
             $table->date('date_issued')->nullable(); // Fecha de expedicion del titulo
+            $table->foreignId('career_id')->constrained()->deleteOnCascade(); // Carrera
+            $table->foreignId('person_id')->constrained()->deleteOnCascade(); // Datos Personales
+            $table->foreignId('degree_id')->nullable(); // Grado Obtenido
             $table->string('file')->nullable(); // Archivo de documento validatorio
             $table->boolean('published')->default(false); // si se publica
             $table->unsignedInteger('order')->default(1); // orden

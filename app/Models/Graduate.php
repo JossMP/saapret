@@ -22,4 +22,9 @@ class Graduate extends Model
     {
         return $this->belongsTo(Career::class);
     }
+    // Grado Obtenido
+    function degree()
+    {
+        return $this->belongsTo(Degree::class);
+    }
 }

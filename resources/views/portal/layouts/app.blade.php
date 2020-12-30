@@ -26,26 +26,32 @@
 
     <title>@yield('title','Repositorio Digital')</title>
 
-    <!-- <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet"> -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <link href="{{asset('css/app.css')}}" rel="stylesheet">
+
+    <link rel="stylesheet" href="{{asset('css/custom.css')}}">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
         integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA=="
         crossorigin="anonymous" />
-
     @livewireStyles
 </head>
 
 <body class="antialiased font-sans bg-white text-gray-900">
+    @include('portal.parts.message')
+    @auth
+    @include('portal.parts.sidebar')
+    @endauth
     <main class="w-full">
         @include('portal.parts.header')
+
 
         @yield('content')
 
         @include('portal.parts.prefooter')
         @include('portal.parts.footer')
     </main>
-
     @include('portal.parts.scripts')
 </body>
 

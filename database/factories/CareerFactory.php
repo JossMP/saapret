@@ -27,6 +27,7 @@ class CareerFactory extends Factory
         return [
             'name'          => $this->faker->sentence(6),
             'description'   => $this->faker->text(500),
+            'title'         => $this->faker->randomElement(['Profesor de Educacion Primaria', 'Profesor de Educacion Secundaria', 'Profesional tecnico en Computacion e Informatica']),
             'profession_id' => Profession::inRandomOrder()->value('id'),
             'degree_id'     => Degree::inRandomOrder()->value('id'),
             'icon'          => $this->faker->randomElement(['fa fa-graduation-cap', 'fa fa-user-graduate', 'fa fa-laptop-code', 'fa fa-microscope', 'fa fa-swimmer']),

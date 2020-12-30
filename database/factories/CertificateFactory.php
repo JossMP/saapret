@@ -23,10 +23,12 @@ class CertificateFactory extends Factory
     public function definition()
     {
         return [
-            'mention'    => $this->faker->realText(300),
+            'mention'    => $this->faker->realText(200),
             'organizer'  => $this->faker->company(),
-            'place'      => $this->faker->realText(250),
+            'place'      => $this->faker->city,
+            'hours'      => (rand(4, 8) * 2),
             'start_date' => $this->faker->date('Y-m-d', 'now'),
+            'end_date'   => $this->faker->date('Y-m-d', 'now'),
             'order'      => rand(0, 10),
             'person_id'  => Person::inRandomOrder()->value('id'),
         ];

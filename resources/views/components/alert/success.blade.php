@@ -1,15 +1,17 @@
-<section class="grid bg-transparent w-full px-5 sm:px-8 pt-8 lg:px-16 xl:px-40 2xl:px-64 gap-x-2" x-data="{alert:false}"
-    :class="{'hidden':alert}">
-    <div class="justify-self-center text-white px-6 py-4 border-0 rounded relative mb-4 bg-green-500">
-        <span class="text-xl inline-block mr-5 align-middle">
-            <i class="fa fa-check-circle"></i>
-        </span>
-        <span class="inline-block align-middle mr-8">
-            <b class="capitalize">Exito!</b> {{$slot}}
-        </span>
-        <button @click.prevent="alert=true"
-            class="absolute bg-transparent text-2xl font-semibold leading-none right-0 top-0 mt-4 mr-6 outline-none focus:outline-none">
-            <span>×</span>
-        </button>
+<div class="absolute z-50 top-0 right-0 flex" x-data="{'alert':true}" :class="{'hidden':!alert}" x-init="setTimeout(function () {
+    alert = false
+  }, 2000)">
+    <div class="mr-2 mt-24">
+        <div class="bg-white rounded-lg border-gray-300 border p-3 shadow-lg">
+            <div class="flex flex-row items-center">
+                <div class="px-2">
+                    <i class="text-2xl text-green-600 fa fa-check-circle"></i>
+                </div>
+                <div class="ml-2 mr-6">
+                    <span class="font-semibold">SUCCESS!</b> </span>
+                    <span class="block text-gray-500">{{$slot}}</span>
+                </div>
+            </div>
+        </div>
     </div>
-</section>
+</div>

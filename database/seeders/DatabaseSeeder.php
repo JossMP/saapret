@@ -2,7 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Graduate;
+use App\Models\Certificate;
+use App\Models\Experience;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,6 +18,12 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
         $this->call(UsersSeeder::class);
 
+        // Datos ubigeo
+        $this->call(DepartmentSeeder::class);
+        $this->call(ProvinceSeeder::class);
+        $this->call(DistrictSeeder::class);
+
+
         // Data tests
         $this->call(ProfessionSeeder::class);
         $this->call(DegreeSeeder::class);
@@ -25,5 +32,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(PersonSeeder::class);
         $this->call(GraduateSeeder::class);
+
+        Certificate::factory()->times(500)->create();
+        Experience::factory()->times(500)->create();
     }
 }

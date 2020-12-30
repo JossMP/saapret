@@ -20,6 +20,7 @@ class CreateCareersTable extends Migration
 
             $table->string('name');
             $table->text('description')->nullable();
+            $table->text('title')->nullable();
             $table->foreignId('profession_id')->constrained();
             $table->foreignId('degree_id')->constrained();
             $table->string('icon')->default('fa fa-graduation-cap');

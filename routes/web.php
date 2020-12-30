@@ -17,8 +17,16 @@ Route::name('portal.')->group(function () {
     Route::get('/terms', [App\Http\Controllers\PortalController::class, 'terms'])->name('terms');
 
     // Graduados
-    Route::resource('/graduates', \App\Http\Controllers\GraduateController::class)->only(['index']);
-    Route::get('/graduates/{career}', [\App\Http\Controllers\GraduateController::class, 'index_career'])->name('graduates.career');
+    Route::resource('/graduate', \App\Http\Controllers\GraduateController::class);
+    Route::get('/graduate/career/{career}', [\App\Http\Controllers\GraduateController::class, 'index_career'])->name('graduate.career');
+
+    // Person
+    Route::resource('/person', \App\Http\Controllers\PersonController::class);
+    Route::get('/person/{person}/graduate', [\App\Http\Controllers\PersonController::class, 'graduate_create'])->name('person.graduate.create');
+    Route::put('/person/{person}/graduate', [\App\Http\Controllers\PersonController::class, 'graduate_store'])->name('person.graduate.store');
+
+    Route::get('/person/{person}/experience', [\App\Http\Controllers\PersonController::class, 'experience_create'])->name('person.experience.create');
+    Route::put('/person/{person}/experience', [\App\Http\Controllers\PersonController::class, 'experience_store'])->name('person.experience.store');
 });
 
 

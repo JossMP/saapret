@@ -1,4 +1,4 @@
-<a href="{{ route('portal.graduates.career', $graduate->career) }}"
+<a href="{{ route('portal.person.show', $graduate->person) }}"
     class="flex bg-gray-50 shadow-lg rounded-lg overflow-hidden">
     <div class="w-2 bg-red-500"></div>
     <div class="flex items-center px-2 py-3 w-full">

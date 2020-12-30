@@ -1,4 +1,4 @@
 <!-- start slide -->
-<div class="relative pt-20">
+<div class="relative">
 </div>
 <!-- end slide -->

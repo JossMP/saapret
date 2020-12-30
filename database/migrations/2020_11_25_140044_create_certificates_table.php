@@ -21,10 +21,11 @@ class CreateCertificatesTable extends Migration
             $table->string('place')->nullable();
             $table->double('hours')->nullable();
             $table->date('start_date');
+            $table->date('end_date');
             $table->boolean('published')->default(false);
             $table->unsignedInteger('order')->default(1);
 
-            $table->foreignId('person_id')->deleteOnCascade();
+            $table->foreignId('person_id')->constrained()->deleteOnCascade();
 
             $table->timestamps();
             $table->softDeletes();

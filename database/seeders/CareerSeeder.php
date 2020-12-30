@@ -14,6 +14,35 @@ class CareerSeeder extends Seeder
      */
     public function run()
     {
+        // Pedagogico Puno
+        $list = [
+            [
+                'name'        => 'Educación Inicial',
+                'description' => 'Educación Inicial',
+            ], [
+                'name'        => 'Educación Primaria',
+                'description' => 'Educación Primaria',
+            ], [
+                'name'        => 'Educación Secundaria - Comunicación',
+                'description' => 'Educación Secundaria - Comunicación',
+            ], [
+                'name'        => 'Educación Secundaria - Ciencias Sociales',
+                'description' => 'Educación Secundaria - Ciencias Sociales',
+            ],  [
+                'name'        => 'Educación Secundaria - Ciencia, Tecnología y Ambiente',
+                'description' => 'Educación Secundaria - Ciencia, Tecnología y Ambiente',
+            ], [
+                'name'        => 'Educación Secundaria - Matemática',
+                'description' => 'Educación Secundaria - Matemática',
+            ], [
+                'name'        => 'Computación e Informática',
+                'description' => 'Computación e Informática',
+            ], [
+                'name'        => 'Educación Física',
+                'description' => 'Educación Física',
+            ],
+        ];
+        /*
         $list = [
             // Inicial
             [
@@ -54,7 +83,7 @@ class CareerSeeder extends Seeder
                 'name'        => 'Educación Física',
                 'description' => 'Educación Física',
             ],
-        ];
+        ];*/
 
         foreach ($list as $career) {
             Career::factory()->create($career);

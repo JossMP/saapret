@@ -2,7 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\District;
 use App\Models\Person;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -22,16 +24,19 @@ class PersonFactory extends Factory
      */
     public function definition()
     {
+        $gender = $this->faker->randomElement(['male', 'female']);
+        $photo = ($gender == 'male') ? $this->faker->optional(0.7)->randomElement(['M001.jpg', 'M002.jpg', 'M003.jpg', 'M004.jpg']) : $this->faker->optional(0.7)->randomElement(['F001.jpg', 'F002.jpg', 'F003.jpg', 'F004.jpg']);
         return [
-            'name'           => $this->faker->firstName,
+            'name'           => $this->faker->firstName($gender),
             'last_name'      => $this->faker->lastName . ' ' . $this->faker->lastName,
-            'photo'          => $this->faker->optional(0.7)->randomElement(['23969368.jpg', '44274790.jpg', '44274792.jpg', '44650963.jpg', '73501651.jpg', '77663725.jpg']),
+            'photo'          => $photo,
             'birthday'       => $this->faker->dateTimeBetween('now', '+30 years'),
             'doc_type'       => $this->faker->randomElement(['DNI', 'CE', 'Pasaporte']),
             'doc_num'        => $this->faker->unique()->randomNumber(8),
             'marital_status' => $this->faker->randomElement(['Soltero(a)', 'Casado(a)']),
-            'location_home'  => $this->faker->randomNumber(6),
-            'location_birth' => $this->faker->randomNumber(6),
+            'location_home'  => District::inRandomOrder()->value('id'), //$this->faker->randomNumber(6),
+            'location_birth' => District::inRandomOrder()->value('id'), //$this->faker->randomNumber(6),
+            'user_id'        => $this->faker->optional(0.01)->randomElement([User::inRandomOrder()->value('id')]),
             'address'        => $this->faker->address,
             'email'          => $this->faker->freeEmail,
             'phone'          => $this->faker->phoneNumber,

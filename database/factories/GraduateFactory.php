@@ -29,14 +29,14 @@ class GraduateFactory extends Factory
             'career_id'   => Career::inRandomOrder()->value('id'),
             'person_id'   => Person::inRandomOrder()->value('id'),
             'degree_id'   => $this->faker->optional(0.9)->randomElement([Degree::inRandomOrder()->value('id')]),
-            'title'       => Profession::inRandomOrder()->value('name'),
+            'title'       => Career::inRandomOrder()->value('title'),
             'title_num'   => $this->faker->numerify('###-#####-##'),
             'mention'     => $this->faker->sentence(),
             'start_year'  => $this->faker->year(),
             'end_year'    => $this->faker->year(),
             'date_issued' => $this->faker->date(),
             'file'        => $this->faker->optional(0.9)->randomElement(['titulo.pdf', 'resolucion.pdf']),
-            'published'   => $this->faker->boolean,
+            'published'   => true,
             'order'       => $this->faker->randomDigit,
         ];
     }

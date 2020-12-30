@@ -5,7 +5,7 @@
     <div class="grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-3">
 
         @foreach ($careers as $career)
-        <a href="{{ route('portal.graduates.career', $career) }}"
+        <a href="{{ route('portal.graduate.career', $career) }}"
             class="w-full mx-auto rounded-lg hover:bg-gray-50 bg-white shadow-lg px-5 pt-5 pb-6 mt-16 text-blue-500"
             style="max-width: 500px" @if($loop->iteration>3) :class="{hidden:!all}" @endif>
             <div class="w-full pt-1 pb-5">
@@ -16,7 +16,8 @@
 
             <div class="w-full">
                 <p class="text-md text-indigo-500 font-bold text-center">{{ $career->name }}</p>
-                <p class="text-xs text-gray-500 text-center">{{ $career->graduates()->count() }} Registros</p>
+                <p class="text-xs text-gray-500 text-center">
+                    {{ $career->graduates()->where('published', '=', true)->count() }} Registros</p>
             </div>
         </a>
         @endforeach

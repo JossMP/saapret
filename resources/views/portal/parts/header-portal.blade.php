@@ -21,6 +21,7 @@
                     </svg>
                 </button>
             </div>
+
             <div class="navbar-toggler md:flex flex-grow items-center hidden"
                 :class="{ 'hidden':!toggle,'bg-white text-black':toggle }" @click.away="toggle = false">
                 <ul class="flex flex-col md:flex-row list-none md:ml-auto h-full font-bold">
@@ -54,7 +55,7 @@
                                         <div class="rounded-lg shadow-xs overflow-hidden">
                                             <div class="z-20 relative grid bg-white px-0 py-2">
                                                 @foreach (\App\Models\Profession::limit(10)->get() as $profession)
-                                                <a href="{{ route('portal.books.publication_type', $profession) }}"
+                                                <a href="{{ route('portal.graduate.career', $profession) }}"
                                                     class="px-2 m-0 py-2 flex items-center hover:bg-gray-500 transition ease-in-out duration-150">
                                                     <i class="fa fa-graduation-cap text-red-500"></i>
                                                     <div class="pl-2">
@@ -79,7 +80,7 @@
                         </a>
                     </li>
                     <li class="h-full px-2">
-                        <a href="{{route('panel.index')}}"
+                        <a href="{{route('login')}}"
                             class="mt-4 md:mt-auto px-3 py-2 text-xs flex items-center h-full hover:opacity-75 bg-blue-600 text-white rounded-lg hover:bg-blue-800 uppercase">
                             Intranet
                         </a>

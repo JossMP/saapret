@@ -1,25 +1,25 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
-    <head>
-        @include('panel.parts.head')
-        @livewireStyles
-    </head>
+<head>
+    @include('panel.parts.head')
+    @livewireStyles
+</head>
 
-    <body class="sidebar-mini text-sm layout-fixed layout-navbar-fixed">
-        <div class="wrapper" id="app">
-            @include('panel.parts.navbar')
+<body class="text-sm layout-fixed layout-navbar-fixed sidebar-collapse">
+    <div class="wrapper" id="app">
+        @include('panel.parts.navbar')
 
-            @include('panel.parts.sidebar')
+        @include('panel.parts.sidebar')
 
-            @include('panel.parts.content')
+        @include('panel.parts.content')
 
-            @include('panel.parts.footer')
+        @include('panel.parts.footer')
 
-            @include('panel.parts.sidebar-right')
-        </div>
-        @include('panel.parts.scripts')
-        @livewireScripts
-    </body>
+        @include('panel.parts.sidebar-right')
+    </div>
+    @include('panel.parts.scripts')
+    @livewireScripts
+</body>
 
 </html>

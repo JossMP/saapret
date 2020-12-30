@@ -1,4 +1,4 @@
-@extends('portal.layout.portal')
+@extends('portal.layouts.app')
 
 
 @section('title')

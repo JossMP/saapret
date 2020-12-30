@@ -24,8 +24,17 @@ class CreatePeopleTable extends Migration
             $table->enum('doc_type', ['DNI', 'CE', 'Pasaporte', 'Otros']);
             $table->string('doc_num', 16)->unique();
             $table->string('marital_status')->nullable()->default('Soltero(a)');
-            $table->unsignedInteger('location_home'); //ubigeo
-            $table->unsignedInteger('location_birth'); //ubigeo
+
+            // ubigeo address
+            $table->unsignedBigInteger('location_home')->nullable();
+            $table->foreign('location_home')->references('id')->on('districts');
+            // ubigeo birth
+            $table->unsignedBigInteger('location_birth')->nullable();
+            $table->foreign('location_birth')->references('id')->on('districts');
+
+            // linked User
+            $table->foreignId('user_id')->nullable();
+
             $table->string('address')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();

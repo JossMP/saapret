@@ -24,7 +24,7 @@ class CreateExperiencesTable extends Migration
             $table->boolean('published')->default(false);
             $table->unsignedInteger('order')->default(1);
 
-            $table->foreignId('person_id')->deleteOnCascade();
+            $table->foreignId('person_id')->constrained()->deleteOnCascade();
 
             $table->timestamps();
             $table->softDeletes();
