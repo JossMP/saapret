@@ -158,7 +158,7 @@
                     </div>
 
                     @auth
-                    @if(Auth::user()->can('people.update') || Auth::user()->id==$person->user_id)
+                    @if(Auth::user()->can('graduates.update') || Auth::user()->id==$person->user_id)
                     <div class="mx-4 pb-4">
                         <div class="w-full text-right">
                             <a href="{{ route('portal.person.show', $person) }}" class="text-red-400">Cancelar</a>

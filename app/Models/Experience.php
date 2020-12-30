@@ -10,4 +10,10 @@ class Experience extends Model
 {
     use HasFactory, SoftDeletes;
     protected $guarded = [];
+
+    // Datois Personales
+    function person()
+    {
+        return $this->belongsTo(Person::class);
+    }
 }

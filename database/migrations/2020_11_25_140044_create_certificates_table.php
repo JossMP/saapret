@@ -21,7 +21,7 @@ class CreateCertificatesTable extends Migration
             $table->string('place')->nullable();
             $table->double('hours')->nullable();
             $table->date('start_date');
-            $table->date('end_date');
+            $table->date('end_date')->nullable();
             $table->boolean('published')->default(false);
             $table->unsignedInteger('order')->default(1);
 

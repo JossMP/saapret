@@ -19,14 +19,23 @@ Route::name('portal.')->group(function () {
     // Graduados
     Route::resource('/graduate', \App\Http\Controllers\GraduateController::class);
     Route::get('/graduate/career/{career}', [\App\Http\Controllers\GraduateController::class, 'index_career'])->name('graduate.career');
+    // Experiences
+    Route::resource('/experience', \App\Http\Controllers\ExperienceController::class);
+    // Certificate
+    Route::resource('/certificate', \App\Http\Controllers\CertificateController::class);
 
     // Person
     Route::resource('/person', \App\Http\Controllers\PersonController::class);
+
+    // Gratuates -> Person
     Route::get('/person/{person}/graduate', [\App\Http\Controllers\PersonController::class, 'graduate_create'])->name('person.graduate.create');
     Route::put('/person/{person}/graduate', [\App\Http\Controllers\PersonController::class, 'graduate_store'])->name('person.graduate.store');
-
+    // Experiences -> Person
     Route::get('/person/{person}/experience', [\App\Http\Controllers\PersonController::class, 'experience_create'])->name('person.experience.create');
     Route::put('/person/{person}/experience', [\App\Http\Controllers\PersonController::class, 'experience_store'])->name('person.experience.store');
+    // Certificates -> Person
+    Route::get('/person/{person}/certificate', [\App\Http\Controllers\PersonController::class, 'certificate_create'])->name('person.certificate.create');
+    Route::put('/person/{person}/certificate', [\App\Http\Controllers\PersonController::class, 'certificate_store'])->name('person.certificate.store');
 });
 
 

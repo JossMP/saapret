@@ -93,21 +93,21 @@
 
                         <div class="col-span-4">
                             <label class="block uppercase tracking-wide text-grey-darker text-xs font-bold mb-2"
-                                for="mention">
+                                for="task">
                                 Tarea desempeñada
                             </label>
-                            <textarea name="mention" id="mention"
-                                class="appearance-none block w-full bg-grey-lighter text-grey-darker border @error('mention') border-red-500 @else border-gray-400 @enderror rounded py-3 px-4"
+                            <textarea name="task" id="task"
+                                class="appearance-none block w-full bg-grey-lighter text-grey-darker border @error('task') border-red-500 @else border-gray-400 @enderror rounded py-3 px-4"
                                 rows="5"
-                                placeholder="Descripcion de tarea desarrollada en la institucion">{{ old('mention') }}</textarea>
-                            @error('mention')
+                                placeholder="Descripcion de tarea desarrollada en la institucion">{{ old('task') }}</textarea>
+                            @error('task')
                             <p class="text-red-500 text-xs italic">{{ $message }}</p>
                             @enderror
                         </div>
                     </div>
 
                     @auth
-                    @if(Auth::user()->can('people.update') || Auth::user()->id==$person->user_id)
+                    @if(Auth::user()->can('experiences.create') || Auth::user()->id==$person->user_id)
                     <div class="mx-4 pb-4">
                         <div class="w-full text-right">
                             <a href="{{ route('portal.person.show', $person) }}" class="text-red-400">Cancelar</a>

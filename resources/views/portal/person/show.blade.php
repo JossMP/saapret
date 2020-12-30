@@ -39,7 +39,7 @@
                         <h3 class="w-full text-xl tracking-wide uppercase font-semibold ml-2">
                             Titulo/Grado Obtenido
                         </h3>
-                        @if(Auth::check() && (Auth::user()->can('people.create') ||
+                        @if(Auth::check() && (Auth::user()->can('graduates.create') ||
                         Auth::user()->id==$person->user_id))
                         <a href="{{ route('portal.person.graduate.create',$person) }}"
                             class="float-right text-xs text-blue-900 z-10 bg-blue-300 hover:bg-blue-400 font-bold py-1 px-2 rounded inline-flex items-center">
@@ -55,14 +55,14 @@
                         <h3 class="flex font-bold uppercase pb-2 mx-8 items-center">
                             <i class="text-gray-600 fa fa-fw {{ $graduate->career->icon }}"></i>
                             <span class="w-full ml-4 md:ml-2">{{ $graduate->title }}</span>
-                            @if(Auth::check() && (Auth::user()->can('people.create') ||
+                            @if(Auth::check() && (Auth::user()->can('graduates.delete') ||
                             Auth::user()->id==$person->user_id))
                             <form action="{{ route('portal.graduate.destroy',$graduate) }}" method="POST" x-data
-                                x-ref="form{{$graduate->id}}">
+                                x-ref="grad{{$graduate->id}}">
                                 @csrf
                                 @method('delete')
                                 <button
-                                    x-on:click.prevent="if (confirm('Seguro que desea borrarlo?')) $refs.form{{$graduate->id}}.submit()"
+                                    x-on:click.prevent="if (confirm('Seguro que desea borrarlo?')) $refs.grad{{$graduate->id}}.submit()"
                                     type="submit"
                                     class="float-right text-red-900 z-10 focus:outline-none hover:text-red-400 font-bold rounded inline-flex items-center">
                                     <i class="fa fa-fw fa-trash mr-1"></i>
@@ -155,7 +155,7 @@
                     <div class="flex items-center">
                         <i class="text-red-800 fa fa-fw fa-user-tie"></i>
                         <h3 class="w-full text-xl tracking-wide uppercase font-semibold ml-2">Experiencia Laboral</h3>
-                        @if(Auth::check() && (Auth::user()->can('people.create') ||
+                        @if(Auth::check() && (Auth::user()->can('experiences.create') ||
                         Auth::user()->id==$person->user_id))
                         <a href="{{ route('portal.person.experience.create',$person) }}"
                             class="float-right text-xs text-blue-900 z-10 bg-blue-300 hover:bg-blue-400 font-bold py-1 px-2 rounded inline-flex items-center">
@@ -168,8 +168,23 @@
 
                     @foreach ($person->experiences as $experience)
                     <div class="bg-white shadow-md rounded pt-2 pb-8 mb-4 my-4">
-                        <h3 class="font-bold uppercase pb-2 mx-8">
-                            {{ $experience->institution }}
+                        <h3 class="flex font-bold uppercase pb-2 mx-8 items-center">
+                            <span class="w-full">{{ $experience->institution }}</span>
+
+                            @if(Auth::check() && (Auth::user()->can('experiences.delete') ||
+                            Auth::user()->id==$person->user_id))
+                            <form action="{{ route('portal.experience.destroy',$experience) }}" method="POST" x-data
+                                x-ref="exp{{$experience->id}}">
+                                @csrf
+                                @method('delete')
+                                <button
+                                    x-on:click.prevent="if (confirm('Seguro que desea borrarlo?')) $refs.exp{{$experience->id}}.submit()"
+                                    type="submit"
+                                    class="float-right text-red-900 z-10 focus:outline-none hover:text-red-400 font-bold rounded inline-flex items-center">
+                                    <i class="fa fa-fw fa-trash mr-1"></i>
+                                </button>
+                            </form>
+                            @endif
                         </h3>
                         <div class="grid sm:grid-cols-5 gap-4 mx-8 pb-4">
                             <div class="col-span-5 md:col-span-3">
@@ -221,17 +236,36 @@
                     <div class="flex items-center">
                         <i class="text-red-800 fa fa-fw fa-chalkboard-teacher"></i>
                         <h3 class="w-full text-xl tracking-wide uppercase font-semibold ml-2">Certificados y Cursos</h3>
-                        @if(Auth::check() && (Auth::user()->can('people.create') ||
+                        @if(Auth::check() && (Auth::user()->can('certificates.create') ||
                         Auth::user()->id==$person->user_id))
-                        <a href="#" class="float-right"><i class="fa fa-edit"></i></a>
+                        <a href="{{ route('portal.person.certificate.create', $person) }}"
+                            class="float-right text-xs text-blue-900 z-10 bg-blue-300 hover:bg-blue-400 font-bold py-1 px-2 rounded inline-flex items-center">
+                            <i class="fa fa-fw fa-plus mr-1"></i>
+                            <span>Añadir</span>
+                        </a>
                         @endif
                     </div>
                     <hr class="bg-gradient-to-r from-red-300 to-white h-1">
 
                     @foreach ($person->certificates as $certificate)
                     <div class="bg-white shadow-md rounded pt-2 pb-8 mb-4 my-4">
-                        <h3 class="font-bold uppercase pb-2 mx-8">
-                            {{ $certificate->mention }}
+                        <h3 class="flex font-bold uppercase pb-2 mx-8 items-center">
+                            <span class="w-full">{{ $certificate->mention }}</span>
+
+                            @if(Auth::check() && (Auth::user()->can('certificates.delete') ||
+                            Auth::user()->id==$person->user_id))
+                            <form action="{{ route('portal.certificate.destroy', $certificate) }}" method="POST" x-data
+                                x-ref="cert{{$certificate->id}}">
+                                @csrf
+                                @method('delete')
+                                <button
+                                    x-on:click.prevent="if (confirm('Seguro que desea borrarlo?')) $refs.cert{{$certificate->id}}.submit()"
+                                    type="submit"
+                                    class="float-right text-red-900 z-10 focus:outline-none hover:text-red-400 font-bold rounded inline-flex items-center">
+                                    <i class="fa fa-fw fa-trash mr-1"></i>
+                                </button>
+                            </form>
+                            @endif
                         </h3>
                         <div class="grid sm:grid-cols-5 gap-4 mx-8 pb-4">
                             <div class="col-span-5 md:col-span-3">
