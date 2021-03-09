@@ -1,7 +1,7 @@
 @extends('portal.layouts.app')
 
 @section('title')
-{{ $person->name }} {{ $person->last_name }}
+{{ $person->name }} {{ $person->first_last_name }} {{ $person->second_last_name }}
 @endsection
 
 @section('content')
@@ -14,8 +14,9 @@
             <div class="flex flex-col justify-center items-center relative h-full bg-black bg-opacity-50 text-white">
                 <img src="{{ $person->photo }}"
                     class="h-40 w-40 object-contain bg-white rounded-full border-white border-2"
-                    title="{{ $person->name }} {{ $person->last_name }}">
-                <h1 class="text-2xl font-semibold">{{ $person->name }} {{ $person->last_name }}</h1>
+                    title="{{ $person->name }} {{ $person->first_last_name }} {{ $person->second_last_name }}">
+                <h1 class="text-2xl font-semibold">{{ $person->name }} {{ $person->first_last_name }}
+                    {{ $person->second_last_name }}</h1>
                 <h4 class="text-sm font-semibold">{{ $person->doc_type }} {{ $person->doc_num }}</h4>
             </div>
         </div>

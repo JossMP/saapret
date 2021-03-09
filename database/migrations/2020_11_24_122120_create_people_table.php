@@ -18,11 +18,13 @@ class CreatePeopleTable extends Migration
             $table->id();
 
             $table->string('name');
-            $table->string('last_name');
+            $table->string('first_last_name');
+            $table->string('second_last_name');
             $table->string('photo')->nullable();
             $table->date('birthday');
-            $table->enum('doc_type', ['DNI', 'CE', 'Pasaporte', 'Otros']);
-            $table->string('doc_num', 16)->unique();
+            $table->enum('gender', ['Masculino', 'Femenino'])->default('Masculino');
+            $table->enum('doc_type', ['DNI', 'CE', 'Pasaporte', 'Otros'])->default('DNI');
+            $table->string('doc_num', 16);
             $table->string('marital_status')->nullable()->default('Soltero(a)');
 
             // ubigeo address

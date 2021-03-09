@@ -13,8 +13,8 @@
                 <form class="w-full px-6 space-y-6 sm:px-10 sm:space-y-8" method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="flex flex-col mb-6">
-                        <label for="email" class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">
-                            {{ __('E-Mail Address') }}:
+                        <label for="username" class="mb-1 text-xs sm:text-sm tracking-wide text-gray-600">
+                            Usuario:
                         </label>
                         <div class="relative">
                             <div
@@ -26,12 +26,12 @@
                                 </svg>
                             </div>
 
-                            <input id="email" type="email" name="email"
-                                class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border @error('email') border-red-500 @else border-gray-400 @enderror w-full py-2 focus:outline-none focus:border-blue-400"
-                                placeholder="E-Mail Address" value="{{ old('email') }}" required autocomplete="email"
+                            <input id="username" type="text" name="username"
+                                class="text-sm sm:text-base placeholder-gray-500 pl-10 pr-4 rounded-lg border @error('username') border-red-500 @else border-gray-400 @enderror w-full py-2 focus:outline-none focus:border-blue-400"
+                                placeholder="Usuario" value="{{ old('username') }}" required autocomplete="username"
                                 autofocus>
                         </div>
-                        @error('email')
+                        @error('username')
                         <p class="text-red-500 text-xs italic">
                             {{ $message }}
                         </p>

@@ -25,6 +25,7 @@ Route::name('portal.')->group(function () {
     Route::resource('/certificate', \App\Http\Controllers\CertificateController::class);
 
     // Person
+    Route::post('/person/reniec', [\App\Http\Controllers\PersonController::class, 'reniec'])->name('person.reniec');
     Route::resource('/person', \App\Http\Controllers\PersonController::class);
 
     // Gratuates -> Person
@@ -36,13 +37,17 @@ Route::name('portal.')->group(function () {
     // Certificates -> Person
     Route::get('/person/{person}/certificate', [\App\Http\Controllers\PersonController::class, 'certificate_create'])->name('person.certificate.create');
     Route::put('/person/{person}/certificate', [\App\Http\Controllers\PersonController::class, 'certificate_store'])->name('person.certificate.store');
+
+    // Panel | pagina de administracion
 });
+Route::get('/panel', [\App\Http\Controllers\PanelController::class, 'index'])->name('panel.index');
 
 
 Auth::routes(['verify' => true, 'register' => false]);
 
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+/*
 Route::group(['middleware' => ['verified']], function () {
     Route::prefix('panel')->name('panel.')->group(function () {
 
@@ -58,3 +63,4 @@ Route::group(['middleware' => ['verified']], function () {
         Route::resource('profile', 'App\Http\Controllers\ProfileController')->only(['store', 'index']);
     });
 });
+*/

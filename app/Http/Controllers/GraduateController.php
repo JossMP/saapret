@@ -28,7 +28,6 @@ class GraduateController extends Controller
     }
 
 
-
     function destroy(Graduate $graduate)
     {
         $user = Auth::user();

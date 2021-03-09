@@ -26,7 +26,8 @@
                 <span class="flex font-medium text-sm text-gray-400 px-4 my-4 uppercase">Registro Egesados</span>
             </li>
             <li class="my-px">
-                <a href="#" class="flex flex-row items-center h-12 px-4 rounded-lg text-gray-500 hover:bg-gray-700">
+                <a href="{{ route('portal.graduate.index') }}"
+                    class="flex flex-row items-center h-12 px-4 rounded-lg text-gray-500 hover:bg-gray-700">
                     <span class="flex items-center justify-center text-lg text-blue-400">
                         <i class="fa fa-th-list fa-fw"></i>
                     </span>

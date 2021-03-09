@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use App\Traits\UploadTrait;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class PersonController extends Controller
 {
@@ -20,7 +21,96 @@ class PersonController extends Controller
 
     function __construct()
     {
-        $this->middleware('auth')->except(['show']); //only(['edit', 'graduate_create', 'update', 'graduate_store']);
+        $this->middleware('auth')->except(['reniec', 'show', 'index', 'store']); //only(['edit', 'graduate_create', 'update', 'graduate_store']);
+    }
+
+    function reniec(Request $request)
+    {
+        // AQUI CODIGO DE USO DE API
+        sleep(1);
+        //return response()->json([]);
+        return response()->json([
+            'name'             => 'JOSUE',
+            'first_last_name'  => 'MAZCO',
+            'second_last_name' => 'PUMA',
+            'address'          => 'Pje. Las Flores S/N',
+            'birthday'         => '22-05-1987',
+            'gender'           => 'MASCULINO',
+            'marital_status'   => 'SOLTERO',
+            'marital_status'   => 'SOLTERO',
+        ]);
+    }
+
+    function index(Request $request)
+    {
+        return view('portal.person.register');
+    }
+    function store(Request $request)
+    {
+        $data = $request->validate(
+            [
+                'name'             => 'required',
+                'first_last_name'  => 'required',
+                'second_last_name' => 'required',
+                'gender'           => 'required',
+                'marital_status'   => 'required',
+                'address'          => 'required',
+                'location_home'    => 'required',
+                'location_birth'   => 'required',
+                'birthday'         => 'required|date',
+                'doc_type'         => 'required',
+                'doc_num'          => 'required|unique:people,doc_num,null,null,doc_type,' . $request->get('doc_type'),
+                'phone'            => 'required',
+                'email'            => 'required|email|unique:users,email',
+                'username'         => 'required|unique:users,username',
+                'photo'            => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                'password'         => 'required|confirmed',
+            ],
+            [
+                'name.required'             => 'Nombres es requerido',
+                'first_last_name.required'  => 'Primer apellido es requerido',
+                'second_last_name.required' => 'Segundo apellido es requerido',
+                'gender.required'           => 'Este campo es requerido',
+                'marital_status.required'   => 'Este campo es requerido',
+                'address.required'          => 'Direccion es requerida',
+                'location_home.required'    => 'Ubigeo de direccion es requerido',
+                'location_birth.required'   => 'Ubigeo de Nacimiento es requerido',
+                'birthday.required'         => 'Fecha de cumpleaño es requerido',
+                'birthday.date'             => 'Fecha no valida',
+                'doc_type.required'         => 'Tipo de documento requerido',
+                'doc_num.required'          => 'Numero de documento es requerido',
+                'doc_num.unique'            => 'Otro usuario ya esta usando este documento',
+                'phone.required'            => 'Telefono requerido',
+                'email.required'            => 'Email es requerido',
+                'email.email'               => 'Email no valido',
+                'email.unique'              => 'Este e-mail ya esta en uso',
+                'username.required'         => 'Usuario requerido',
+                'username.unique'           => 'Este usuario ya esta en uso',
+                'photo.image'               => 'Imagen no valida',
+                'photo.mimes'               => 'Formato no valida (png, jpg, gif)',
+                'photo.max'                 => 'Tamaño maximo 2mb',
+                'password.required'         => 'La contraseña es requerida',
+                'password.confirmed'        => 'La contaseña no coincide',
+            ]
+        );
+
+        $data_user = [
+            'email'     => $request->email,
+            'password'  => $request->password,
+            'username'  => $request->email,
+            'name'      => $request->name,
+            'last_name' => $request->first_last_name . ' ' . $request->second_last_name,
+        ];
+        /*
+        $person = Person::where('doc_type', $request->doc_type)->where('doc_num', $request->doc_num)->get();
+        if ($person->count() > 0) {
+            $validate->errors()->add('doc_num', 'Documento ya existe');
+            return redirect()->back()->withInput()->with("message", "Ya existe una persona con ese numero de documento")
+                ->with("type", "error")->withErrors($validate->errors());
+        }*/
+
+        return redirect()->back()->withInput()->with("message", "Se ha registrado los datos correctamente")
+            ->with("type", "success");
     }
 
     function graduate_create(Person $person)
@@ -149,22 +239,53 @@ class PersonController extends Controller
     {
         $user = Auth::user();
         if (($user->can('people.create') || $user->id == $person->user_id)) {
-            $data = $request->validate([
-                'name'           => 'required',
-                'last_name'      => 'required',
-                'address'        => 'required',
-                'location_home'  => 'required',
-                'location_birth' => 'required',
-                'birthday'       => 'required|date',
-                'doc_type'       => 'required',
-                'doc_num'        => 'required',
-                'phone'          => 'required',
-                'email'          => 'required|email',
-                'photo'          => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            ]);
+            $data = $request->validate(
+                [
+                    'name'             => 'required',
+                    'first_last_name'  => 'required',
+                    'second_last_name' => 'required',
+                    'gender'           => 'required',
+                    'address'          => 'required',
+                    'location_home'    => 'required',
+                    'location_birth'   => 'required',
+                    'birthday'         => 'required|date',
+                    'doc_type'         => 'required',
+                    'doc_num'          => 'required|unique:people,doc_num,null,id,doc_type,' . $request->get('doc_type'),
+                    'phone'            => 'required',
+                    'email'            => 'required|email|unique:users,email',
+                    'username'         => 'required|unique:users,username',
+                    'photo'            => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+                    'password'         => 'required|confirmed',
+                ],
+                [
+                    'name.required'             => 'Nombres es requerido',
+                    'first_last_name.required'  => 'Primer apellido es requerido',
+                    'second_last_name.required' => 'Segundo apellido es requerido',
+                    'gender.required'           => 'Este campo es requerido',
+                    'address.required'          => 'Direccion es requerida',
+                    'location_home.required'    => 'Ubigeo de direccion es requerido',
+                    'location_birth.required'   => 'Ubigeo de Nacimiento es requerido',
+                    'birthday.required'         => 'Fecha de cumpleaño es requerido',
+                    'birthday.date'             => 'Fecha no valida',
+                    'doc_type.required'         => 'Tipo de documento requerido',
+                    'doc_num.required'          => 'Numero de documento es requerido',
+                    'doc_num.unique'            => 'Otro usuario ya esta usando este documento',
+                    'phone.required'            => 'Telefono requerido',
+                    'email.required'            => 'Email es requerido',
+                    'email.email'               => 'Email no valido',
+                    'email.unique'              => 'Este e-mail ya esta en uso',
+                    'username.required'         => 'Usuario requerido',
+                    'username.unique'           => 'Este usuario ya esta en uso',
+                    'photo.image'               => 'Imagen no valida',
+                    'photo.mimes'               => 'Formato no valida (png, jpg, gif)',
+                    'photo.max'                 => 'Tamaño maximo 2mb',
+                    'password.required'         => 'La contraseña es requerida',
+                    'password.confirmed'        => 'La contaseña no coincide',
+                ]
+            );
 
             $last_photo = $person->getRawOriginal('photo');
-            $data['slug'] = Str::slug($data['name'] . '_' . $data['last_name'] . '_' . $data['doc_num']);
+            $data['slug'] = Str::slug($data['name'] . '_' . $data['first_last_name'] . '_' . $data['second_last_name'] . '_' . $data['doc_num']);
 
             if ($request->has('photo')) {
                 $image = $request->file('photo');

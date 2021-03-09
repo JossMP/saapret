@@ -5,7 +5,8 @@
         <img class="bg-white w-24 h-24 object-contain rounded-full" src="{{ $graduate->person->photo }}">
         <div class="mx-3 w-full">
             <h2 class="text-xl font-semibold text-gray-800 uppercase">
-                {{ $graduate->person->name }} {{ $graduate->person->last_name }}
+                {{ $graduate->person->name }} {{ $graduate->person->first_last_name }}
+                {{ $graduate->person->second_last_name }}
             </h2>
             <p class="text-gray-600">
                 {{ $graduate->career->name }}
