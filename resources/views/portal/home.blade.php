@@ -8,9 +8,6 @@ Sistema de Seguimiento de Egresados
 
 @include('portal.parts.slide')
 
-
-
-
 <section class="bg-white w-full px-5 sm:px-8 xl:pt-6 lg:px-16 xl:px-40 2xl:px-64 pt-4">
     <div class="mx-auto px-8 py-8 lg:py-40 relative flex flex-col lg:flex-row items-center">
         <div class="lg:w-1/2 flex flex-col items-center lg:items-start">

@@ -7,6 +7,7 @@
             <h2 class="text-xl font-semibold text-gray-800 uppercase">
                 {{ $graduate->person->name }} {{ $graduate->person->first_last_name }}
                 {{ $graduate->person->second_last_name }}
+                {{ $graduate->person->namefull }}
             </h2>
             <p class="text-gray-600">
                 {{ $graduate->career->name }}

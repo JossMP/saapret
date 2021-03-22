@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PersonSeeder::class);
         $this->call(GraduateSeeder::class);
 
-        Certificate::factory()->times(500)->create();
-        Experience::factory()->times(500)->create();
+        Certificate::factory()->times(1000)->create();
+        Experience::factory()->times(1000)->create();
     }
 }

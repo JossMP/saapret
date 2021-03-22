@@ -40,6 +40,8 @@ Route::name('portal.')->group(function () {
 
     // Panel | pagina de administracion
 });
+
+
 Route::get('/panel', [\App\Http\Controllers\PanelController::class, 'index'])->name('panel.index');
 
 
