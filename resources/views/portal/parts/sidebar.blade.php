@@ -1,16 +1,19 @@
 <div x-data="{show:false}" class="" @click.away="show=false">
     <div class="fixed bg-gray-800 h-screen z-50 w-2">
-        <div class="h-full absolute items-center top-1/2 -left-4">
+        <div class="h-full absolute flex items-center -left-4">
             <div class="bg-gray-800 rounded-full w-12 h-14 mx-auto text-center cursor-pointer"
                 @click="{show = (show) ? false : true}">
-                <i class="text-white fa fa-chevron-right fa-fw text-4xl pt-3 pl-3"></i>
+                <i class="text-white fa fa-chevron-right fa-fw text-2xl pt-3 pl-3"></i>
             </div>
         </div>
     </div>
-    <div class="w-full max-w-xs p-2 bg-gray-800 h-screen z-50" x-show="show" :class="{'hidden':!show,'fixed':show}"
+    <div class="fixed w-full max-w-xs p-2 bg-gray-800 h-screen z-50" x-show="show"
         x-transition:enter="duration-500" x-transition:enter-start="inset-y-0 -left-full"
-        x-transition:enter-end="inset-y-0 left-0" x-transition:leave="duration-500"
-        x-transition:leave-start="inset-y-0 left-0" x-transition:leave-end="inset-y-0 -left-full">
+        x-transition:enter-end="inset-y-0 left-0" x-transition:leave="duration-700"
+        x-transition:leave-start="inset-y-0 left-0" x-transition:leave-end="inset-y-0 -left-full" style="display:none;">
+        <div class="absolute top-0 right-0 cursor-pointer m-4 px-2 rounded" @click="show=false">
+            <i class="fa fa-times text-gray-300 text-2xl"></i>
+        </div>
         <ul class="h-full overflow-y-auto bscroll">
             <li class="my-px">
                 <a class="flex text-sm font-bold leading-relaxed mr-4 py-2 whitespace-no-wrap uppercase"
