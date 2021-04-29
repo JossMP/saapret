@@ -1,124 +1,81 @@
-<div x-data="{toggle:false, open:false}" class="pb-20 z-10">
+<div class="pb-20" x-data="{showNav:false}" @click.away="showNav=false">
     <!-- start header -->
-    <header
-        class="w-full bg-white shadow-lg text-black fixed top-0 left-0 z-20 px-4 sm:px-8 xl:pt-6 lg:px-16 xl:px-40 2xl:px-64 pt-4"
-        id="navbar">
-        <nav class=" mx-auto flex flex-wrap items-center justify-between">
-            <div class="w-full relative flex justify-between md:w-auto  px-4 md:static md:block md:justify-start">
-                <a class="flex text-sm font-bold leading-relaxed mr-4 py-2 whitespace-no-wrap uppercase"
-                    href="{{ route('portal.home') }}">
-                    <img src="{{asset('/images/logo.png')}}" class="h-10" />
-                    <span class="pl-2">
-                        <span class="block">Seguimiento</span> egresados
-                    </span>
+    <header class="fixed z-20 bg-white w-full shadow-md">
+        <nav class="mx-auto lg:px-32 sm:flex sm:justify-between">
+            <div class="relative">
+                <a href="{{ route('portal.home') }}" class="flex items-center p-6">
+                    <img src="{{ asset('/images/logo.png') }}" class="h-10">
+                    <span class="font-bold uppercase">Seguimiento Egresados</span>
                 </a>
-                <button
-                    class="text-blue-400 opacity-75 cursor-pointer text-xlg leading-none border border-solid border-transparent rounded bg-transparent block md:hidden outline-none focus:outline-none"
-                    @click="toggle = !toggle, scrollTop=false" type="button" id="btn-toggler">
-                    <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <span class="absolute right-4 top-6 cursor-pointer sm:hidden" @click="showNav=!showNav">
+                    <svg class="fill-current h-6 w-6 text-gray-400 hover:text-gray-500" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                         <title>Menu</title>
-                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+                        <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"></path>
                     </svg>
-                </button>
+                </span>
             </div>
+            <div class="border sm:border-none sm:block hidden" :class="{'hidden':!showNav}">
+                <ul class="transition duration-500 font-medium sm:flex sm:items-center" x-data="{showSubMenu1:false,showSubMenu2:false}">
+                    
+                    <li>
+                        <a href="{{ route('portal.graduate.index') }}" 
+                            class="flex px-6 py-3 sm:py-8 hover:text-indigo-700 cursor-pointer block">
+                            <span>Lista de egresados</span>
+                        </a>
+                    </li>
 
-            <div class="navbar-toggler md:flex flex-grow items-center hidden"
-                :class="{ 'hidden':!toggle,'bg-white text-black':toggle }">
-                <ul class="flex flex-col md:flex-row list-none md:ml-auto h-full font-bold">
-                    <li class="h-full px-2">
-                        <a href="{{ route('portal.graduate.index') }}"
-                            class="px-3 py-2 text-xs flex items-center h-full hover:text-blue-600 hover:border-red-700 border-b uppercase">
-                            <span>Lista Egresados</span>
-                        </a>
-                    </li>
-                    <li class="h-full px-2">
-                        <div class="relative" x-data="{ career: false }" @click.away="career = false">
-                            <button @click="career = !career"
-                                class="font-bold focus:outline-none px-3 py-2 text-xs flex items-center h-full hover:text-blue-600 hover:border-red-700 border-b uppercase">
-                                <span>Carreras Profesionales</span>
-                            </button>
-                            <div x-show="career" class="origin-top-left absolute left-0 pt-0 rounded-md shadow-lg"
-                                style="display: none;">
-                                <div class="absolute -ml-2 transform px-2 w-100 max-w-md sm:px-0 lg:ml-0 md:left-1/2">
-                                    <div class="rounded-lg shadow-lg">
-                                        <div class="rounded-lg shadow-xs overflow-hidden">
-                                            <div class="z-20 relative grid bg-white px-0 py-2">
-                                                @foreach (\App\Models\Career::limit(10)->get() as $career)
-                                                <a href="{{ route('portal.graduate.career', $career) }}"
-                                                    class="px-2 m-0 py-2 flex items-center hover:bg-gray-500 transition ease-in-out duration-150">
-                                                    <i class="fa fa-graduation-cap text-red-500"></i>
-                                                    <div class="pl-2">
-                                                        <p
-                                                            class="block font-semibold text-xs uppercase truncate text-gray-900">
-                                                            {{ $career->name }}
-                                                        </p>
-                                                    </div>
-                                                </a>
-                                                @endforeach
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li class="h-full px-2">
-                        <a href="{{ route('portal.contact.index') }}"
-                            class="px-3 py-2 text-xs flex items-center h-full hover:text-blue-600 hover:border-red-700 border-b uppercase">
-                            <span>Contactenos</span>
-                        </a>
+                    <li @click.away="showSubMenu1=false">
+                        <a class="px-6 py-3 sm:py-8 hover:text-indigo-700 sm:hover-none cursor-pointer block" @click="showSubMenu1=!showSubMenu1"><span>Carreras profesionales</span><span class="icon-down-open-1"></span></a>
+                        <ul class="bg-gray-100 text-gray-500 sm:absolute"  x-show.transition.in.duration.100ms.out.duration.75ms="showSubMenu1" style="display:none;">
+                            @foreach (\App\Models\Career::limit(10)->get() as $career)
+                                <li>
+                                    <a href="{{ route('portal.graduate.career', $career) }}" 
+                                        class="px-8 py-3 hover:bg-gray-200 hover:text-indigo-700 cursor-pointer block">
+                                        {{ $career->name }}
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
                     </li>
                     @auth
-                    <li class="h-full px-2">
-                        <div @click.away="userMenu = false" class="ml-3 relative" x-data="{ userMenu: false }">
-                            <div>
-                                <button @click="userMenu = !userMenu" x-bind:aria-expanded="userMenu"
-                                    class="flex text-sm focus:outline-none items-center">
-
-                                    <div class="bg-gray-800 flex text-sm rounded-full">
-                                        <img class="h-8 w-8 rounded-full"
-                                            src="{{ asset('images/photos/'.Auth::user()->avatar) }}"
-                                            alt="{{ Auth::user()->username }}">
-                                    </div>
-                                    <span class="block uppercase font-semibold pl-2">{{ Auth::user()->username }}</span>
-                                </button>
-                            </div>
-                            <div x-show="userMenu"
-                                x-description="Profile dropdown panel, show/hide based on dropdown state."
-                                x-transition:enter="transition ease-out duration-100"
-                                x-transition:enter-start="transform opacity-0 scale-95"
-                                x-transition:enter-end="transform opacity-100 scale-100"
-                                x-transition:leave="transition ease-in duration-75"
-                                x-transition:leave-start="transform opacity-100 scale-100"
-                                x-transition:leave-end="transform opacity-0 scale-95"
-                                class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5"
-                                role="menu" aria-orientation="vertical" aria-labelledby="user-menu"
-                                style="display: none;">
-                                @role('super-admin')
-                                <a href="{{ route('portal.faq') }}"
-                                    class="px-3 py-2 text-xs flex items-center h-full hover:text-blue-600 hover:bg-gray-100 uppercase">
-                                    <span>Registar Nuevo</span>
+                    <li @click.away="showSubMenu2=false">
+                        <a class="flex px-6 py-3 sm:py-8 hover:text-indigo-700 cursor-pointer block" @click="showSubMenu2=!showSubMenu2">
+                            <span class="pr-2">
+                                <div class="rounded-full">
+                                    <img class="h-6 w-6 rounded-full" 
+                                        src="{{ asset('images/photos/'.Auth::user()->avatar) }}" 
+                                        alt="{{ Auth::user()->username }}">
+                                </div>
+                            </span>
+                            <span>{{ Auth::user()->username }}</span>
+                            <span class="icon-down-open-1"></span>
+                        </a>
+                        <ul class="bg-gray-100 text-gray-500 sm:absolute" x-show.transition.in.duration.100ms.out.duration.75ms="showSubMenu2" style="display:none;">
+                            @role('super-admin')
+                            <li>
+                                <a href="{{ route('portal.faq') }}" class="px-8 py-3 hover:bg-gray-200 hover:text-indigo-700 cursor-pointer block">
+                                    Registrar nuevo
                                 </a>
-                                @endrole
-                                <a href="#"
-                                    class="px-3 py-2 text-xs flex items-center h-full hover:text-blue-600 hover:bg-gray-100 uppercase">
-                                    <span>Perfil</span>
+                            </li>
+                            @endrole
+                            <li>
+                                <a class="px-8 py-3 hover:bg-gray-200 hover:text-indigo-700 cursor-pointer block">Perfil</a>
+                            </li>
+                            <li>
+                                <a class="px-8 py-3 hover:bg-gray-200 hover:text-indigo-700 cursor-pointer block">
+                                    <form action="{{ route('logout') }}" method="post">
+                                        @csrf
+                                        <button type="submit" class="font-medium">Cerrar Sesión</button>                                        
+                                    </form>
                                 </a>
-                                <form action="{{ route('logout') }}" method="post">
-                                    @csrf
-                                    <button type="submit"
-                                        class="w-full focus:outline-none border-red-300 border-t-2 block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 uppercase font-bold">
-                                        Cerrar Sesion
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
+                            </li>
+                        </ul>
                     </li>
                     @else
-                    <li class="h-full px-2">
-                        <a href="{{route('panel.index')}}"
-                            class="mt-4 md:mt-auto px-3 py-2 text-xs flex items-center h-full hover:opacity-75 bg-blue-600 text-white rounded-lg hover:bg-blue-800 uppercase">
-                            Iniciar Sesion
+                    <li>
+                        <a href="{{ route('panel.index') }}"
+                            class="bg-blue-600 hover:bg-opacity-75 transition-colors duration-200 text-blue-50 text-xs font-semibold rounded-full px-4 py-2 ml-6 my-2 sm:m-0 inline-block cursor-pointer uppercase">
+                            Iniciar sesión
                         </a>
                     </li>
                     @endauth
