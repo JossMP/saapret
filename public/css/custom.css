@@ -26,3 +26,10 @@
 .bscroll::-webkit-scrollbar-track:active {
     background: rgba(31, 41, 55, 0.7);
 }
+
+/* paginate */
+
+span[aria-current="page"]>span{
+    background:#3B82F6;
+    color:white;
+}
